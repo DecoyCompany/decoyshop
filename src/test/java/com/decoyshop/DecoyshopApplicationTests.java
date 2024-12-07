@@ -1,4 +1,4 @@
-package com.decoyshop.decoyshop;
+package com.decoyshop;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

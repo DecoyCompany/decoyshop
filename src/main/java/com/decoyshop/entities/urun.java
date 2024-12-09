@@ -33,7 +33,4 @@ public class urun
     @Column(name = "URUN_KATEGORISI", nullable = false)
     private String URUN_KATEGORISI;
 
-
-
-
 }

@@ -3,10 +3,13 @@ package com.decoyshop.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import java.util.Collection;
+import com.decoyshop.entities.weak.Stock;
+import com.decoyshop.entities.weak.Siparis;
 
 @Entity
 @Data
-public class sirket {
+public class Sirket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,14 +24,13 @@ public class sirket {
     private String SIRKET_ADRESI;
 
     @Column(name = "ILETISIM_NO", nullable = false)
-    private int ILETISIM_NO;
+    private String ILETISIM_NO;
 
 
-    @Column(name = "ALINAN_SIPARIS_ID", nullable = false)
-    private int ALINAN_SIPARIS_ID;
+    @OneToMany(mappedBy = "sirket", cascade = CascadeType.ALL)
+    private Collection<Siparis> siparisler;
 
-    @Column(name = "STOCK_ID", nullable = false)
-    private int STOCK_ID;
-
+    @OneToMany(mappedBy = "sirket", cascade = CascadeType.ALL)
+    private Collection<Stock> stocklar;
 
 }

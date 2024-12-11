@@ -36,7 +36,8 @@
         android:id="@+id/search_bar"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="26dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
         android:background="@drawable/edit_text_background"
         android:hint="marka, ürün veya kategori ara"
         android:padding="15dp"
@@ -45,5 +46,19 @@
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/user_icon"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginEnd="2dp"
+        android:contentDescription="@string/user_icon"
+        android:padding="8dp"
+        android:src="@drawable/ic_home_usericon_24dp"
+        app:layout_constraintBottom_toBottomOf="@id/search_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/search_bar"
+        app:layout_constraintTop_toTopOf="@id/search_bar" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

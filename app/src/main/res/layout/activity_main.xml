@@ -32,4 +32,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/mobile_navigation" />
 
+    <TextView
+        android:id="@+id/search_bar"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="26dp"
+        android:background="@drawable/edit_text_background"
+        android:hint="marka, ürün veya kategori ara"
+        android:padding="15dp"
+        android:textColor="@color/textColorWhite"
+        android:textColorHint="@color/TextColorHint"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

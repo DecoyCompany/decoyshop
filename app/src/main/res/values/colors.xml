@@ -10,6 +10,6 @@
 
     <color name="textColorWhite">#FFFFFFFF</color>
     <color name="TextColorHint">#F5F5F5</color>
-
+    <color name="orange_400">#FF3D00</color>
 
 </resources>

@@ -3,7 +3,7 @@ package com.decoyshop.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Data
@@ -25,5 +25,5 @@ public class Kategori {
     private Kategori ust_kategori;
 
     @OneToMany(mappedBy = "ust_kategori", cascade = CascadeType.ALL)
-    private Collection<Kategori> alt_kategoriler;
+    private List<Kategori> alt_kategoriler;
 }

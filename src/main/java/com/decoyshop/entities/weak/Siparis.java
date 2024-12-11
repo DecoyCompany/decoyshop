@@ -3,7 +3,8 @@ import com.decoyshop.entities.*;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import java.util.Collection;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -21,7 +22,7 @@ public class Siparis
     @JoinTable(name = "SIPARIS_URUN",
             joinColumns = @JoinColumn(name = "SIPARIS_ID"),
             inverseJoinColumns = @JoinColumn(name = "URUN_ID"))
-    private Collection<Urun> alinan_urunler;
+    private List<Urun> alinan_urunler;
 
     @ManyToOne
     @JoinColumn(name = "ALICI",nullable = false)

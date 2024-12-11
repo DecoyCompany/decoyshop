@@ -3,8 +3,8 @@ import com.decoyshop.entities.*;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -33,7 +33,7 @@ public class Yorum
     private Date tarih = new Date();
 
     @Column(name = "YORUM_RESIMLER")
-    private Collection<String> resimler;
+    private List<String> resimler;
 
     @OneToOne
     @JoinColumn(name = "YORUM_CEVAP")

@@ -5,7 +5,8 @@ import com.decoyshop.entities.weak.Yorum;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Collection;
+import java.util.List;
+
 
 @Entity
 @Data
@@ -28,22 +29,22 @@ public class Kullanici
     @ElementCollection
     @CollectionTable(name = "KULLANICI_KARTLAR", joinColumns = @JoinColumn(name = "KULLANICI_ID"))
     @Column(name = "KULLANICI_KARTLARI",nullable = false)
-    private Collection<String> kart_bilgisi;
+    private List<String> kart_bilgisi;
 
     @ElementCollection
     @CollectionTable(name = "KULLANICI_ADRESLER", joinColumns = @JoinColumn(name = "KULLANICI_ID"))
     @Column(name = "KULLANICI_ADRESLERI",nullable = false)
-    private Collection<String> adres_bilgisi;
+    private List<String> adres_bilgisi;
 
     @OneToMany(mappedBy = "alici")
-    private Collection<Siparis> siparisler;
+    private List<Siparis> siparisler;
 
     @OneToMany(mappedBy = "yorumcu",cascade = CascadeType.ALL)
-    private Collection<Yorum> yorumlar;
+    private List<Yorum> yorumlar;
 
     @ManyToMany
     @JoinTable(name = "KULLANICI_FAVORILER",
             joinColumns = @JoinColumn(name = "KULLANICI_ID"),
             inverseJoinColumns = @JoinColumn(name = "URUN_ID"))
-    private Collection<Urun> favoriler;
+    private List<Urun> favoriler;
 }

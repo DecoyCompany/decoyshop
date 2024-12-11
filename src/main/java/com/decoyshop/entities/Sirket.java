@@ -3,9 +3,10 @@ package com.decoyshop.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import java.util.Collection;
 import com.decoyshop.entities.weak.Stock;
 import com.decoyshop.entities.weak.Siparis;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -28,9 +29,9 @@ public class Sirket {
 
 
     @OneToMany(mappedBy = "sirket", cascade = CascadeType.ALL)
-    private Collection<Siparis> siparisler;
+    private List<Siparis> siparisler;
 
     @OneToMany(mappedBy = "sirket", cascade = CascadeType.ALL)
-    private Collection<Stock> stocklar;
+    private List<Stock> stocklar;
 
 }

@@ -4,9 +4,11 @@ import com.decoyshop.entities.*;
 import com.decoyshop.entities.weak.*;
 import com.decoyshop.repositories.*;
 import com.decoyshop.repositories.weak.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,14 +17,17 @@ import java.util.List;
 
 
 @Service
-public class CRUD
+public class CRUD_service
 {
-    private static final Logger logger = LoggerFactory.getLogger(CRUD.class);
-
+    private static final Logger logger = LoggerFactory.getLogger(CRUD_service.class);
     private final HashMap<Class<?>, JpaRepository<?, Integer>> repositories = new HashMap<>();
-    CRUD(Urun_repo urunRepo, Sirket_repo sirketRepo, Kullanici_repo kullaniciRepo, Kategori_repo kategoriRepo,
-         Yorum_repo yorumRepo, Stock_repo stockRepo,Siparis_repo siparisRepo)
+    private final PasswordEncoder passwordEncoder;
+
+    @Autowired
+    CRUD_service(PasswordEncoder passwordEncoder, Urun_repo urunRepo, Sirket_repo sirketRepo, Kullanici_repo kullaniciRepo, Kategori_repo kategoriRepo,
+                 Yorum_repo yorumRepo, Stock_repo stockRepo, Siparis_repo siparisRepo)
     {
+        this.passwordEncoder = passwordEncoder;
         repositories.put(Urun.class,urunRepo);
         repositories.put(Sirket.class,sirketRepo);
         repositories.put(Kullanici.class, kullaniciRepo);
@@ -42,6 +47,16 @@ public class CRUD
         JpaRepository<T, Integer> repo = (JpaRepository<T, Integer>) repositories.get(objeler.getFirst().getClass());
         if (repo != null)
         {
+            if(objeler.getFirst() instanceof Kullanici)
+            {
+                objeler.forEach(a->
+                {
+                    String sifre = ((Kullanici)a).getSifre();
+                    sifre = passwordEncoder.encode(sifre);
+                    ((Kullanici) a).setSifre(sifre);
+                });
+            }
+
             repo.saveAllAndFlush(objeler);
             return true;
         }
@@ -77,7 +92,7 @@ public class CRUD
         return null;
     }
 
-    public <T> Page Read_more(Class<T> class_type, Pageable page)
+    public <T> Page<T> Read_more(Class<T> class_type, Pageable page)
     {
         JpaRepository<T, Integer> repo = (JpaRepository<T, Integer>) repositories.get(class_type);
         if (repo != null)
@@ -107,8 +122,17 @@ public class CRUD
             if (repo.findAllById(ids).isEmpty())
             {
                 logger.warn("No entities found for deletion with provided IDs: {}", ids);
+                return false;
             }
-            return true;
+            repo.deleteAllByIdInBatch(ids);
+
+            if (repo.findAllById(ids).isEmpty())
+            {
+                logger.warn("Deleted all the {} objects with provided IDs: {}", class_type,ids);
+                return true;
+            }
+            logger.warn("cant delete the all objcets,look class:{} ids:{}", class_type,ids);
+            return false;
         }
         logger.error("Repository not found for class: {}", class_type.getName());
         return false;

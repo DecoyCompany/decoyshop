@@ -1,7 +1,10 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.ImageView;
+import com.example.myapplication.ui.myaccount.MyAccountActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -16,6 +19,7 @@ import com.example.myapplication.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +38,14 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
+        // Kullanıcı simgesine tıklanma olayını ekleme
+        ImageView userIcon = findViewById(R.id.user_icon);
+        userIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MyAccountActivity.class);
+                startActivity(intent);
+            }
+        });
     }
-
 }

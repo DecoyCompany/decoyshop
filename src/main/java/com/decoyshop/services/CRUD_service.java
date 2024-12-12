@@ -82,6 +82,13 @@ public class CRUD_service
         return null;
     }
 
+    public boolean Exsist_by_email(String email)
+    {
+        Kullanici_repo repo =(Kullanici_repo) repositories.get(Kullanici.class);
+        Kullanici temp = repo.findByemail(email);
+        return temp != null;
+    }
+
     public <T> List<T> Read_more(Class<T> class_type)
     {
         JpaRepository<T, Integer> repo = (JpaRepository<T, Integer>) repositories.get(class_type);

@@ -12,34 +12,48 @@
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="250dp"
+        android:layout_marginBottom="49dp"
         android:src="@drawable/sign"
+        app:layout_constraintBottom_toTopOf="@+id/textView1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/imageView"
+        android:layout_marginTop="34dp"
+        android:layout_marginBottom="38dp"
         android:text="@string/register"
         android:textColor="@color/textColorWhite"
         android:textColorHint="@color/TextColorHint"
         android:textSize="24sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="281dp" />
-
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout1"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.159"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/textView1"
-        android:orientation="vertical"
         android:layout_margin="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="15dp"
+        android:orientation="vertical"
         android:padding="5dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="340dp">
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView1">
 
         <!--gmail icin -->
         <LinearLayout
@@ -52,17 +66,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_email_24" />
-            
+
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
-                android:textColorHint="@color/TextColorHint"
+                android:inputType="textEmailAddress"
+                android:minHeight="48dp"
                 android:textColor="@color/textColorWhite"
-                android:inputType="textEmailAddress" />
+                android:textColorHint="@color/TextColorHint"
+                tools:ignore="TouchTargetSizeCheck" />
 
         </LinearLayout>
-
 
 
         <!--kullanici_adi -->
@@ -81,12 +96,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="İsim Soyisim"
-                android:textColorHint="@color/TextColorHint"
+                android:inputType="text"
+                android:minHeight="48dp"
                 android:textColor="@color/textColorWhite"
-                android:inputType="text" />
+                android:textColorHint="@color/TextColorHint" />
 
         </LinearLayout>
-
 
 
         <!--sifre -->
@@ -105,34 +120,46 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Sifre Olusturun"
-                android:textColorHint="@color/TextColorHint"
+                android:inputType="textPassword"
+                android:minHeight="48dp"
                 android:textColor="@color/textColorWhite"
-                android:inputType="textPassword" />
+                android:textColorHint="@color/TextColorHint" />
 
         </LinearLayout>
-
 
 
     </LinearLayout>
 
     <Button
+        android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:leyout_below="@id/linearLayout1"
-        android:theme="@style/Widget.Material3.Button"
         android:layout_margin="15dp"
+        android:layout_marginBottom="100dp"
+
         android:text="@string/register"
-        tools:layout_editor_absoluteX="5dp"
-        tools:layout_editor_absoluteY="503dp" />
+        android:theme="@style/Widget.Material3.Button"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout1"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout1"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout1"
+        app:layout_constraintVertical_bias="0.0" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="25dp"
         android:gravity="center"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="659dp">
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button">
 
 
         <TextView

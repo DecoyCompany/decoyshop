@@ -31,13 +31,9 @@ public class Auth
     {
         http.
                 authorizeHttpRequests((requests) ->
-                        requests.requestMatchers("/","/CRUD").authenticated())
+                        requests.requestMatchers("/","/CRUD").authenticated()
+                                .requestMatchers("/register/**").permitAll())
 
-                .formLogin((form) -> form
-                        .loginPage("/login")
-                        .permitAll())
-
-                .logout((logout) -> logout.permitAll())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

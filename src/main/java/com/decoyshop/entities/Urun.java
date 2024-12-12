@@ -34,7 +34,7 @@ public class Urun extends base_entity
 
     @ManyToOne
     @JoinColumn(name = "URUN_KATEGORISI",nullable = false )
-    private Kategori URUN_KATEGORISI;
+    private Kategori urunKategorisi;
 
     @OneToMany(mappedBy = "urun", cascade = CascadeType.ALL)
     private List<Yorum> yorumlar;

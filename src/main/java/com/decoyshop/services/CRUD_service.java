@@ -132,7 +132,7 @@ public class CRUD_service
         Urun_repo repo = (Urun_repo) repositories.get(Urun.class);
         if (repo != null)
         {
-            return repo.findByURUN_KATEGORISI_IdIn(kategori_ids);
+            return repo.findByurunKategorisi_IdIn(kategori_ids);
         }
         logger.error("Repository not found for class: {}", Kategori.class.getName());
         return null;

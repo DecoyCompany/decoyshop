@@ -45,4 +45,10 @@ public class Kullanici extends base_entity
             joinColumns = @JoinColumn(name = "KULLANICI_ID"),
             inverseJoinColumns = @JoinColumn(name = "URUN_ID"))
     private List<Urun> favoriler;
+
+    @ManyToMany
+    @JoinTable(name = "KULLANICI_SEPET",
+            joinColumns = @JoinColumn(name = "KULLANICI_ID"),
+            inverseJoinColumns = @JoinColumn(name = "URUN_ID"))
+    private List<Urun> sepet;
 }

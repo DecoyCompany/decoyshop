@@ -2,17 +2,15 @@ package com.decoyshop.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
 @Entity
 @Data
-public class Kategori {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "KATEGORI_ID",nullable = false)
-    private int id;
+@EqualsAndHashCode(callSuper = true)
+public class Kategori extends base_entity
+{
 
     @Column(name = "KATEGORI_ISMI", nullable = false)
     private String KATEGORI_ISMI;

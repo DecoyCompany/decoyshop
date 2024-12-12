@@ -5,6 +5,7 @@ import com.decoyshop.entities.weak.*;
 import com.decoyshop.repositories.*;
 import com.decoyshop.repositories.weak.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -101,6 +102,54 @@ public class CRUD_service
         }
         logger.error("Repository not found for class: {}", class_type.getName());
         return Page.empty();
+    }
+
+    public <T> List<T> Read_filtered(Example<T> filter_object)
+    {
+        JpaRepository<T, Integer> repo = (JpaRepository<T, Integer>) repositories.get(filter_object.getClass());
+        if (repo != null)
+        {
+            return repo.findAll(filter_object);
+        }
+        logger.error("Repository not found for class: {}", filter_object.getClass().getName());
+        return null;
+    }
+
+    public List<Urun> Read_Urun_by_Kategori(List<Integer> kategori_ids)
+    {
+        if(kategori_ids == null || kategori_ids.isEmpty())
+        {
+            logger.warn("empty list received!! take a look");
+            return null;
+        }
+        Urun_repo repo = (Urun_repo) repositories.get(Urun.class);
+        if (repo != null)
+        {
+            return repo.findByURUN_KATEGORISI_IdIn(kategori_ids);
+        }
+        logger.error("Repository not found for class: {}", Kategori.class.getName());
+        return null;
+    }
+
+    public <T> boolean Exists_by_id(Class<T> class_type, List<Integer> ids)
+    {
+        if(ids == null || ids.isEmpty())
+        {
+            logger.warn("empty list received!! take a look");
+            return false;
+        }
+
+        JpaRepository<T, Integer> repo = (JpaRepository<T, Integer>) repositories.get(class_type);
+        if (repo != null)
+        {
+            for (Integer a : ids)
+            {
+                if(!repo.existsById(a)){return false;}
+            }
+            return true;
+        }
+        logger.error("Repository not found for class: {}", class_type.getName());
+        return false;
     }
 
     public <T> boolean Update(List<T> objeler)

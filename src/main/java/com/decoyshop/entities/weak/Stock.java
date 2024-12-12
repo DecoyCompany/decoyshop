@@ -1,17 +1,17 @@
 package com.decoyshop.entities.weak;
 import com.decoyshop.entities.Sirket;
 import com.decoyshop.entities.Urun;
+import com.decoyshop.entities.base_entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @Data
-public class Stock
+@EqualsAndHashCode(callSuper = true)
+public class Stock extends base_entity
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
 
     @ManyToOne
     @JoinColumn(name = "SIRKET_ID",nullable = false)

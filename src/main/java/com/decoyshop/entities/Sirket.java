@@ -5,17 +5,15 @@ import jakarta.persistence.*;
 import lombok.Data;
 import com.decoyshop.entities.weak.Stock;
 import com.decoyshop.entities.weak.Siparis;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
 @Entity
 @Data
-public class Sirket {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "SIRKET_ID", nullable = false)
-    private int SIRKET_ID;
+@EqualsAndHashCode(callSuper = true)
+public class Sirket extends base_entity
+{
 
     @Column(name = "SIRKET_ISMI", nullable = false)
     private String SIRKET_ISMI;
@@ -26,7 +24,6 @@ public class Sirket {
 
     @Column(name = "ILETISIM_NO", nullable = false)
     private String ILETISIM_NO;
-
 
     @OneToMany(mappedBy = "sirket", cascade = CascadeType.ALL)
     private List<Siparis> siparisler;

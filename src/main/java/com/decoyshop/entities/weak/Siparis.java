@@ -3,17 +3,15 @@ import com.decoyshop.entities.*;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
 @Entity
 @Data
-public class Siparis
+@EqualsAndHashCode(callSuper = true)
+public class Siparis extends base_entity
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
     @ManyToOne
     @JoinColumn(name = "SIRKET_ID",nullable = false)
     private Sirket sirket;

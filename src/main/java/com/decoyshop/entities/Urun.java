@@ -5,19 +5,16 @@ import com.decoyshop.entities.weak.Yorum;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
 
 @Entity
 @Data
-public class Urun
+@EqualsAndHashCode(callSuper = true)
+public class Urun extends base_entity
 {
-    @Id
-
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "URUNID")
-    private int id;
 
     @Column(name = "URUN_AD", nullable = false)
     private String URUN_AD;

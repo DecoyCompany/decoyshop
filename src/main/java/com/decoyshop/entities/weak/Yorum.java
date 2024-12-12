@@ -2,17 +2,16 @@ package com.decoyshop.entities.weak;
 import com.decoyshop.entities.*;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Data
-public class Yorum
+@EqualsAndHashCode(callSuper = true)
+public class Yorum extends base_entity
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
 
     @ManyToOne
     @JoinColumn(name = "YORUM_YAPILAN_URUN",nullable = false)

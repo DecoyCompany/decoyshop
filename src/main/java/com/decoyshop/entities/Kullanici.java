@@ -4,18 +4,16 @@ import com.decoyshop.entities.weak.Siparis;
 import com.decoyshop.entities.weak.Yorum;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
 
 @Entity
 @Data
-public class Kullanici
+@EqualsAndHashCode(callSuper = true)
+public class Kullanici extends base_entity
 {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "KULLANICI_ID",nullable = false)
-    private int id;
 
     @Column(name = "KULLANICI_ADI",nullable = false)
     private String kullanici_adi;

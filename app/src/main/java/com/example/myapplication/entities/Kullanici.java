@@ -24,6 +24,7 @@ public class Kullanici extends base_entity
 
     private List<String> adres_bilgisi;
 
+    private List<Urun> sepet;
 
     private List<Siparis> siparisler;
 

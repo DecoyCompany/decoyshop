@@ -9,10 +9,12 @@
 
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:id="@+id/imageView"
-        android:src="@drawable/sign" />
+        android:src="@drawable/sign"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView1"
@@ -119,9 +121,37 @@
         android:leyout_below="@id/linearLayout1"
         android:theme="@style/Widget.Material3.Button"
         android:layout_margin="15dp"
-
+        android:text="@string/register"
         tools:layout_editor_absoluteX="5dp"
         tools:layout_editor_absoluteY="503dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:gravity="center"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="659dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Zaten bir hesabın var mı? "
+            android:textColor="@color/textColorWhite"
+            android:textColorHint="@color/TextColorHint" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Giriş Yap"
+            android:textColor="@color/orange_400"
+            android:textColorHint="@color/TextColorHint"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

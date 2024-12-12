@@ -14,11 +14,9 @@ public class Urun extends base_entity
 
     private float URUN_PUANI;
 
-
     private List<String> etiketler;
 
     private List<String> resimler;
-
 
     private Kategori URUN_KATEGORISI;
 

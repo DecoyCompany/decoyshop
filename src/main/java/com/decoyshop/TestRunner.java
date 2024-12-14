@@ -1,6 +1,7 @@
 package com.decoyshop;
 
 import com.decoyshop.entities.Kategori;
+import com.decoyshop.entities.Kullanici;
 import com.decoyshop.services.CRUD_service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -42,6 +43,13 @@ public class TestRunner implements CommandLineRunner {
         testKategori2.setUst_kategori(testKategori3);
 
         kategoris.add(testKategori3);
+
+        Kullanici kullanici1 = new Kullanici();
+        kullanici1.setKullanici_adi("Melik Gok");
+        kullanici1.setEmail("melikgok2128@gmail.com");
+        kullanici1.setSifre("Melik2828");
+
+        crudService.Create(Arrays.asList(kullanici1));
 
         // Call createEntity to save the object
         System.out.println(crudService.Create(kategoris));

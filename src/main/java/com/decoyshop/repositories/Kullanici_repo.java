@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface Kullanici_repo extends JpaRepository<Kullanici,Integer>
 {
     Kullanici findByemail(String email);
+
 }

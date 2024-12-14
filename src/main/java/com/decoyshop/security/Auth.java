@@ -29,8 +29,8 @@ public class Auth
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception
     {
-        http.
-                authorizeHttpRequests((requests) ->
+        http.csrf((csrf) -> csrf.disable())
+                .authorizeHttpRequests((requests) ->
                         requests.requestMatchers("/","/CRUD").authenticated()
                                 .requestMatchers("/auth/**","/register/**").permitAll())
 

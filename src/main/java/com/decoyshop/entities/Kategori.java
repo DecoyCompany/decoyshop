@@ -18,10 +18,10 @@ public class Kategori extends base_entity
     @Column(name = "KATEGORI_STOK",nullable = false)
     private int KATEGORI_STOK = 0;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "UST_KATEGORI_ID")
     private Kategori ust_kategori;
 
-    @OneToMany(mappedBy = "ust_kategori", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "ust_kategori", cascade = CascadeType.PERSIST)
     private List<Kategori> alt_kategoriler;
 }

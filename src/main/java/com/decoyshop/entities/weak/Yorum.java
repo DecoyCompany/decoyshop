@@ -13,11 +13,11 @@ import java.util.List;
 public class Yorum extends base_entity
 {
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "YORUM_YAPILAN_URUN",nullable = false)
     private Urun urun;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "YORUMU_YAPAN",nullable = false)
     private Kullanici yorumcu;
 
@@ -34,7 +34,7 @@ public class Yorum extends base_entity
     @Column(name = "YORUM_RESIMLER")
     private List<String> resimler;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "YORUM_CEVAP")
     private Yorum cevap;
 

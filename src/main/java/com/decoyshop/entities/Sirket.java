@@ -25,10 +25,10 @@ public class Sirket extends base_entity
     @Column(name = "ILETISIM_NO", nullable = false)
     private String ILETISIM_NO;
 
-    @OneToMany(mappedBy = "sirket", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "sirket", cascade = CascadeType.PERSIST)
     private List<Siparis> siparisler;
 
-    @OneToMany(mappedBy = "sirket", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "sirket", cascade = CascadeType.PERSIST)
     private List<Stock> stocklar;
 
 }

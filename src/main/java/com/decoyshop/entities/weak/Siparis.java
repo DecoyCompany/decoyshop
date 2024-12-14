@@ -12,17 +12,17 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class Siparis extends base_entity
 {
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "SIRKET_ID",nullable = false)
     private Sirket sirket;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "SIPARIS_URUN",
             joinColumns = @JoinColumn(name = "SIPARIS_ID"),
             inverseJoinColumns = @JoinColumn(name = "URUN_ID"))
     private List<Urun> alinan_urunler;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ALICI",nullable = false)
     private Kullanici alici;
 

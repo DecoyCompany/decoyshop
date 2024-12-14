@@ -37,16 +37,16 @@ public class Kullanici extends base_entity
     @OneToMany(mappedBy = "alici")
     private List<Siparis> siparisler;
 
-    @OneToMany(mappedBy = "yorumcu",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "yorumcu",cascade = CascadeType.PERSIST)
     private List<Yorum> yorumlar;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "KULLANICI_FAVORILER",
             joinColumns = @JoinColumn(name = "KULLANICI_ID"),
             inverseJoinColumns = @JoinColumn(name = "URUN_ID"))
     private List<Urun> favoriler;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "KULLANICI_SEPET",
             joinColumns = @JoinColumn(name = "KULLANICI_ID"),
             inverseJoinColumns = @JoinColumn(name = "URUN_ID"))

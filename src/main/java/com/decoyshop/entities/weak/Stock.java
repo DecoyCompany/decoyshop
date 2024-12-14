@@ -13,11 +13,11 @@ import lombok.EqualsAndHashCode;
 public class Stock extends base_entity
 {
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "SIRKET_ID",nullable = false)
     private Sirket sirket;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "URUN_ID",nullable = false)
     private Urun urun;
 

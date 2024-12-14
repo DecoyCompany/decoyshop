@@ -32,6 +32,8 @@ public class register_controller
    @PostMapping(value = "/user")
     private ResponseEntity<String> Create_user(@RequestBody Kullanici kullanici)
    {
+       logger.info("Received user registration request: {}", kullanici);
+
        if(kullanici == null)
        {
            logger.warn("received empty user, take look!");
@@ -43,6 +45,6 @@ public class register_controller
            return ResponseEntity.status(409).body("Email already exist");
        }
        boolean value =  crud.Create(Arrays.asList(kullanici));
-       return value ? ResponseEntity.ok("Register successful") : ResponseEntity.status(500).body("Something go wrong");
+       return value ? ResponseEntity.status(200).body("Register successful") : ResponseEntity.status(500).body("Something go wrong");
    }
 }

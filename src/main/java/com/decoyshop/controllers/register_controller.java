@@ -40,7 +40,7 @@ public class register_controller
        if(crud.Exsist_by_email(kullanici.getEmail()))
        {
            logger.warn("email already exist");
-           return ResponseEntity.badRequest().body("Email already exist");
+           return ResponseEntity.status(409).body("Email already exist");
        }
        boolean value =  crud.Create(Arrays.asList(kullanici));
        return value ? ResponseEntity.ok("Register successful") : ResponseEntity.status(500).body("Something go wrong");

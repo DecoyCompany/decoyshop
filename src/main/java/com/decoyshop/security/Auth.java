@@ -32,7 +32,7 @@ public class Auth
         http.
                 authorizeHttpRequests((requests) ->
                         requests.requestMatchers("/","/CRUD").authenticated()
-                                .requestMatchers("/register/**").permitAll())
+                                .requestMatchers("/auth/**","/register/**").permitAll())
 
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 

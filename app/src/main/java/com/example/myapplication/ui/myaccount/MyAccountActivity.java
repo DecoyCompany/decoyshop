@@ -1,11 +1,14 @@
 package com.example.myapplication.ui.myaccount;
 import com.example.myapplication.http_stuff.http_request_builder;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,9 +16,11 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowCompat;
 
 
 import com.example.myapplication.R;
+import com.example.myapplication.ui.login.LoginActivity;
 
 public class MyAccountActivity extends AppCompatActivity {
 
@@ -34,6 +39,17 @@ public class MyAccountActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        // "Giriş Yap" butonunu bul ve tıklama işlemini ekle
+        Button loginButton = findViewById(R.id.button2); // Giriş yap butonunun ID'si
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // LoginActivity'e geçiş yap
+                Intent intent = new Intent(MyAccountActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
         });
 
         TextView email_text = findViewById(R.id.email_text);

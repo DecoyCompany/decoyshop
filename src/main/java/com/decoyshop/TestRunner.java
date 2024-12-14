@@ -24,65 +24,131 @@ public class TestRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // Create a test instance of 'Urun'
-        Kategori testKategori = new Kategori();
-        testKategori.setKATEGORI_ISMI("deneme kategori");
+        // Ana kategoriler
+        Kategori elektronik = new Kategori();
+        elektronik.setKATEGORI_ISMI("Elektronik");
+        elektronik.setKATEGORI_STOK(1000);
+        elektronik.setUst_kategori(null); // Ana kategori, ust_kategori_id null
 
-        Kategori testKategori2 = new Kategori();
-        testKategori2.setKATEGORI_ISMI("deneme kategori2");
+        Kategori giyim = new Kategori();
+        giyim.setKATEGORI_ISMI("Giyim");
+        giyim.setKATEGORI_STOK(500);
+        giyim.setUst_kategori(null); // Ana kategori, ust_kategori_id null
 
-        ArrayList<Kategori> kategoris = new ArrayList<>(5);
-        kategoris.add(testKategori);
-        kategoris.add(testKategori2);
 
-        Kategori testKategori3 = new Kategori();
-        testKategori3.setKATEGORI_ISMI("deneme kategori3");
+        Kategori oyuncak = new Kategori();
+        oyuncak.setKATEGORI_ISMI("Oyuncak");
+        oyuncak.setKATEGORI_STOK(1000);
+        oyuncak.setUst_kategori(null); // Ana kategori, ust_kategori_id null
 
-        testKategori3.setAlt_kategoriler((List<Kategori>) kategoris.clone());
+        Kategori mobilya = new Kategori();
+        mobilya.setKATEGORI_ISMI("Mobilya");
+        mobilya.setKATEGORI_STOK(500);
+        mobilya.setUst_kategori(null); // Ana kategori, ust_kategori_id null
 
-        testKategori.setUst_kategori(testKategori3);
-        testKategori2.setUst_kategori(testKategori3);
 
-        kategoris.add(testKategori3);
+        Kategori ayakkabi = new Kategori();
+        ayakkabi.setKATEGORI_ISMI("Ayakkabı");
+        ayakkabi.setKATEGORI_STOK(450);
+        ayakkabi.setUst_kategori(null); // Ana kategori, ust_kategori_id null
 
-        Kullanici kullanici1 = new Kullanici();
-        kullanici1.setKullanici_adi("Melik Gok");
-        kullanici1.setEmail("melikgok2128@gmail.com");
-        kullanici1.setSifre("Melik2828");
+        Kategori kitap = new Kategori();
+        kitap.setKATEGORI_ISMI("Kitap");
+        kitap.setKATEGORI_STOK(500);
+        kitap.setUst_kategori(null); // Ana kategori, ust_kategori_id null
 
-        crudService.Create(Arrays.asList(kullanici1));
+        // Ana kategorileri kaydet
+        /*
+        crudService.Create(Arrays.asList(elektronik, giyim, kitap, ayakkabi, oyuncak, mobilya));
+        System.out.println("Ana kategoriler kaydedildi.");
+        */
 
-        // Call createEntity to save the object
-        System.out.println(crudService.Create(kategoris));
 
-        List<Kategori> dondu = new ArrayList<>(5);
-        dondu = (List<Kategori>) crudService.Read_more(testKategori.getClass());
+        ArrayList<Kategori> kategoris = new ArrayList<>(50);
+        kategoris.add(kitap);
+        kategoris.add(oyuncak);
+        kategoris.add(giyim);
+        kategoris.add(mobilya);
+        kategoris.add(elektronik);
+        kategoris.add(ayakkabi);
 
-        dondu.forEach(a->{
-            System.out.println(a.getKATEGORI_ISMI());
-        });
 
-        System.out.println("Test products has been created, saved and retrived.");
 
-        testKategori3.setKATEGORI_ISMI("dehistrilmis isim");
-        testKategori2.setKATEGORI_ISMI("birazdan silenecek obje");
+        // Alt kategoriler - Elektronik kategorisi altındaki kategoriler
+        Kategori telefon = new Kategori();
+        telefon.setKATEGORI_ISMI("Telefon");
+        telefon.setKATEGORI_STOK(300);
+        telefon.setUst_kategori(elektronik); // Elektronik kategorisi alt kategorisi
 
-        kategoris.clear();
-        kategoris.add(testKategori3);
+        Kategori bilgisayar = new Kategori();
+        bilgisayar.setKATEGORI_ISMI("Bilgisayar");
+        bilgisayar.setKATEGORI_STOK(200);
+        bilgisayar.setUst_kategori(elektronik); // Elektronik kategorisi alt kategorisi
 
-        System.out.println(crudService.Update(kategoris));
+        // Alt kategoriler - Giyim kategorisi altındaki kategoriler
+        Kategori tshirt = new Kategori();
+        tshirt.setKATEGORI_ISMI("T-shirt");
+        tshirt.setKATEGORI_STOK(100);
+        tshirt.setUst_kategori(giyim); // Giyim kategorisi alt kategorisi
 
-        dondu = (List<Kategori>) crudService.Read_more(testKategori.getClass());
+        Kategori pantolon = new Kategori();
+        pantolon.setKATEGORI_ISMI("Pantolon");
+        pantolon.setKATEGORI_STOK(150);
+        pantolon.setUst_kategori(giyim); // Giyim kategorisi alt kategorisi
 
-        dondu.forEach(a->{
-            System.out.println(a.getKATEGORI_ISMI());
-        });
+        // Alt kategoriler - Oyuncak kategorisi altındaki kategoriler
+        Kategori lego = new Kategori();
+        lego.setKATEGORI_ISMI("Lego");
+        lego.setKATEGORI_STOK(80);
+        lego.setUst_kategori(oyuncak); // Oyuncak kategorisi alt kategorisi
 
-        System.out.println( crudService.Delete_by_id(testKategori2.getClass(),Arrays.asList(testKategori2.getId())));
+        Kategori pelus = new Kategori();
+        pelus.setKATEGORI_ISMI("Peluş");
+        pelus.setKATEGORI_STOK(120);
+        pelus.setUst_kategori(oyuncak); // Oyuncak kategorisi alt kategorisi
 
-        dondu = (List<Kategori>) crudService.Read_more(testKategori.getClass());
+        // Alt kategoriler - Mobilya kategorisi altındaki kategoriler
+        Kategori sehpa = new Kategori();
+        sehpa.setKATEGORI_ISMI("Sehpa");
+        sehpa.setKATEGORI_STOK(50);
+        sehpa.setUst_kategori(mobilya); // Mobilya kategorisi alt kategorisi
 
-        dondu.forEach(a->{
-            System.out.println(a.getKATEGORI_ISMI());
-        });
+        Kategori kanepe = new Kategori();
+        kanepe.setKATEGORI_ISMI("Kanepe");
+        kanepe.setKATEGORI_STOK(75);
+        kanepe.setUst_kategori(mobilya); // Mobilya kategorisi alt kategorisi
+
+        // Alt kategoriler - Ayakkabı kategorisi altındaki kategoriler
+        Kategori bot = new Kategori();
+        bot.setKATEGORI_ISMI("Bot");
+        bot.setKATEGORI_STOK(50);
+        bot.setUst_kategori(ayakkabi); // Ayakkabı kategorisi alt kategorisi
+
+        Kategori sporAyakkabi = new Kategori();
+        sporAyakkabi.setKATEGORI_ISMI("Spor Ayakkabı");
+        sporAyakkabi.setKATEGORI_STOK(60);
+        sporAyakkabi.setUst_kategori(ayakkabi); // Ayakkabı kategorisi alt kategorisi
+
+        // Alt kategoriler - Kitap kategorisi altındaki kategoriler
+        Kategori roman = new Kategori();
+        roman.setKATEGORI_ISMI("Roman");
+        roman.setKATEGORI_STOK(200);
+        roman.setUst_kategori(kitap); // Kitap kategorisi alt kategorisi
+
+        Kategori bilimKurgu = new Kategori();
+        bilimKurgu.setKATEGORI_ISMI("Bilim Kurgu");
+        bilimKurgu.setKATEGORI_STOK(150);
+        bilimKurgu.setUst_kategori(kitap); // Kitap kategorisi alt kategorisi
+
+        // Alt kategorileri kaydet
+        crudService.Create(Arrays.asList(elektronik, giyim, kitap, ayakkabi, oyuncak, mobilya,telefon, bilgisayar, tshirt, pantolon, lego, pelus, sehpa, kanepe, bot, sporAyakkabi, roman, bilimKurgu));
+        System.out.println("kategoriler kaydedildi.");
+
+
+
+
+
+
+
     }
 }

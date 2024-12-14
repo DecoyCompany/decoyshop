@@ -35,51 +35,80 @@ public class CRUD_controller
         return value ? ResponseEntity.ok("objects created") : ResponseEntity.status(500).body("Something go wrong");
     }
 
-    @GetMapping(value = "/read/all")
-    public <T extends base_entity> ResponseEntity<List<T>> Read_all(@RequestBody Class<T> class_type)
+    @GetMapping(value = "/read/{class}/all")
+    public <T extends base_entity> ResponseEntity<List<T>> Read_all(@PathVariable("class") String class_type_string)
     {
-        List<T> value = crud.Read_more(class_type);
-        if(value == null || value.isEmpty())
+        try
         {
-            return ResponseEntity.status(500).body(null);
+            Class<T> class_type = (Class<T>) Class.forName(class_type_string);
+            List<T> value = crud.Read_more(class_type);
+            if(value == null || value.isEmpty())
+            {
+                return ResponseEntity.status(500).body(null);
+            }
+            return ResponseEntity.ok(value);
         }
-        return ResponseEntity.ok(value);
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return ResponseEntity.status(400).body(null);
+        }
     }
 
-    @GetMapping(value = "/read/{batch_size}/{batch_number}")
-    public <T extends base_entity> ResponseEntity<List<T>> Read_batch(@RequestBody Class<T> class_type,
+    @GetMapping(value = "/read/{class}/{batch_size}/{batch_number}")
+    public <T extends base_entity> ResponseEntity<List<T>> Read_batch(@PathVariable("class") String class_type_string,
                                             @PathVariable("batch_size") int batch_size, @PathVariable("batch_number") int batch_number)
     {
-        if(batch_size<1 || batch_number<0)
+        try
         {
+            Class<T> class_type = (Class<T>) Class.forName(class_type_string);
+
+            if(batch_size<1 || batch_number<0)
+            {
+                return ResponseEntity.status(400).body(null);
+            }
+
+            Pageable pageable = PageRequest.of(batch_number,batch_size);
+            Page<T> page = crud.Read_more(class_type,pageable);
+
+            if(page == null || page.isEmpty())
+            {
+                return ResponseEntity.status(500).body(null);
+            }
+            return ResponseEntity.ok(page.getContent());
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
             return ResponseEntity.status(400).body(null);
         }
-
-        Pageable pageable = PageRequest.of(batch_number,batch_size);
-        Page<T> page = crud.Read_more(class_type,pageable);
-
-        if(page == null || page.isEmpty())
-        {
-            return ResponseEntity.status(500).body(null);
-        }
-        return ResponseEntity.ok(page.getContent());
     }
 
-    @GetMapping(value = "/read/by_id/{ids}")
-    public <T extends base_entity> ResponseEntity<List<T>> Read_by_id(@RequestBody Class<T> class_type, @PathVariable("ids") List<Integer> ids)
+    @GetMapping(value = "/read/{class}/by_id/{ids}")
+    public <T extends base_entity> ResponseEntity<List<T>> Read_by_id(@PathVariable("class") String class_type_string, @PathVariable("ids") List<Integer> ids)
     {
-        if(ids == null || ids.isEmpty())
+        try
         {
-            logger.warn("empty list received!! take a look");
+            Class<T> class_type = (Class<T>) Class.forName(class_type_string);
+
+                if(ids == null || ids.isEmpty())
+            {
+                logger.warn("empty list received!! take a look");
+                return ResponseEntity.status(400).body(null);
+            }
+
+            List<T> value = crud.Read_by_id(class_type,ids);
+            if(value == null || value.isEmpty())
+            {
+                return ResponseEntity.status(500).body(null);
+            }
+            return ResponseEntity.ok(value);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
             return ResponseEntity.status(400).body(null);
         }
-
-        List<T> value = crud.Read_by_id(class_type,ids);
-        if(value == null || value.isEmpty())
-        {
-            return ResponseEntity.status(500).body(null);
-        }
-        return ResponseEntity.ok(value);
     }
 
     @GetMapping(value = "/read/urunler/kategori{kategori_ids}")

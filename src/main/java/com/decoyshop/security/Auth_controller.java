@@ -1,5 +1,7 @@
 package com.decoyshop.security;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,16 +9,13 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
 public class Auth_controller
 {
-
+    private static final Logger logger = LoggerFactory.getLogger(Auth_controller.class);
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -26,11 +25,12 @@ public class Auth_controller
     @Autowired
     private Auth_service authService;
 
-    @PostMapping("/login/{email}/{password}")
-    public ResponseEntity<String> login(@PathVariable("email") String email, @PathVariable("password") String password) {
+    @PostMapping("/login/{email}")
+    public ResponseEntity<String> login(@PathVariable("email") String email, @RequestBody String password) {
         // Authenticate the user with email and password
         try
         {
+            logger.warn("request come to login");
             // Authenticate the user with email and password
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(email, password)

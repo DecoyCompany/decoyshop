@@ -39,6 +39,21 @@ public class register_controller
            logger.warn("received empty user, take look!");
            return ResponseEntity.badRequest().body("server didn't receive user");
        }
+
+       //TODO: give regex to this tree
+       if(kullanici.getKullanici_adi().trim().isEmpty())
+       {
+           return ResponseEntity.badRequest().body("invalid name-surname");
+       }
+       if(kullanici.getEmail().trim().isEmpty())
+       {
+           return ResponseEntity.badRequest().body("invalid email");
+       }
+       if(kullanici.getSifre().trim().isEmpty())
+       {
+           return ResponseEntity.badRequest().body("invalid password");
+       }
+
        if(crud.Exsist_by_email(kullanici.getEmail()))
        {
            logger.warn("email already exist");

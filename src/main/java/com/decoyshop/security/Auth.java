@@ -31,8 +31,8 @@ public class Auth
     {
         http.csrf((csrf) -> csrf.disable())
                 .authorizeHttpRequests((requests) ->
-                        requests.requestMatchers("/","/CRUD").authenticated()
-                                .requestMatchers("/auth/**","/register/**").permitAll())
+                        requests.requestMatchers("/auth/**","/register/**").permitAll()
+                                .requestMatchers("/","/CRUD").authenticated())
 
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 

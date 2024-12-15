@@ -1,16 +1,9 @@
 package com.example.myapplication.http_stuff;
 
-import android.os.Looper;
 
 import com.example.myapplication.entities.Kullanici;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
-import java.util.logging.Handler;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -42,17 +35,66 @@ public class http_request_builder
                         .post(body)
                         .build();
 
-                System.out.println("sended a request");
-
                 try (Response response = client.newCall(request).execute())
                 {
                     if (response.body() != null) {
-                        System.out.println("recived a response with body");
-                        String temp = response.body().string();
-                        System.out.println(temp);
-                        return temp; // Response from the server
-                    } else {
+                        return response.body().string(); // Response from the server
+                    }
+                    else
+                    {
                         return "Failed to create user: " + response.code();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+                return e.getMessage();
+            }
+        });
+        Thread new_thread = new Thread(futureTask);
+        new_thread.start();
+
+        try
+        {
+            return futureTask.get();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return e.getMessage();
+        }
+    }
+
+    public static String Login(String email, String password)
+    {
+        FutureTask<String> futureTask = new FutureTask<>(() -> {
+            try
+            {
+                RequestBody body = RequestBody.create(password.getBytes());
+
+                Request request = new Request.Builder()
+                        .url(base_url + "/auth/login/" + email)
+                        .post(body)
+                        .build();
+
+                try (Response response = client.newCall(request).execute())
+                {
+                    if (response.body() != null)
+                    {
+                        if(!response.isSuccessful())
+                        {
+                            return response.body().string();
+                        }
+                        else
+                        {
+                            //TODO: save the token to the shared preferences
+                            return "Register successful";
+                        }
+                    }
+                    else
+                    {
+                        return "Failed to login: " + response.code();
                     }
                 }
             }

@@ -57,7 +57,7 @@ public class MyAccountActivity extends AppCompatActivity {
         TextView password_text = findViewById(R.id.password_text);
         TextView error_text = findViewById(R.id.error_text);
 
-        findViewById(R.id.kayit_ol_kayit_ol_button).setOnClickListener(a -> {
+        findViewById(R.id.kayit_ol_button).setOnClickListener(a -> {
             String response = http_request_builder.Register(name_text.getText().toString(),
                     email_text.getText().toString(),
                     password_text.getText().toString());
@@ -68,6 +68,11 @@ public class MyAccountActivity extends AppCompatActivity {
             }
 
             error_text.setText(response);
+
+            if(response.equals("Register successful"))
+            {
+                loginButton.callOnClick();
+            }
         });
     }
 }

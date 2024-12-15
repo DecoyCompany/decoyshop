@@ -1,6 +1,9 @@
 package com.example.myapplication.http_stuff;
 
 
+import android.content.SharedPreferences;
+import android.content.Context;
+
 import com.example.myapplication.entities.Kullanici;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.concurrent.FutureTask;
@@ -66,7 +69,7 @@ public class http_request_builder
         }
     }
 
-    public static String Login(String email, String password)
+    public static String Login(String email, String password, Context context)
     {
         FutureTask<String> futureTask = new FutureTask<>(() -> {
             try
@@ -88,8 +91,15 @@ public class http_request_builder
                         }
                         else
                         {
-                            //TODO: save the token to the shared preferences
-                            return "Register successful";
+                            SharedPreferences preferences = context.getSharedPreferences("user_data", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = preferences.edit();
+
+                            editor.putString("token", response.body().string());
+                            editor.putString("user_mail", email);
+                            editor.putString("user_password", password);
+                            editor.apply();
+
+                            return "Login successful";
                         }
                     }
                     else

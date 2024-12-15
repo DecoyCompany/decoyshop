@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.login;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +22,20 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         // activity_login.xml layout dosyasını kullanıyoruz
 
+         TextView email_text = findViewById(R.id.email_text);
+         TextView password_text = findViewById(R.id.password_text);
+         TextView error_text = findViewById(R.id.error_text);
+
+        SharedPreferences preferences = getSharedPreferences("user_data", MODE_PRIVATE);
+        String user_mail = preferences.getString("user_mail", null);
+        String user_password = preferences.getString("user_password", null);
+
+        if(user_mail != null && user_password != null)
+        {
+            email_text.setText(user_mail);
+            password_text.setText(user_password);
+        }
+
 
         // "Kayıt ol" butonunu bul ve tıklama işlemini ekle
         Button loginButton = findViewById(R.id.kayıt_ol_yonlendir_button); // Kayıt ol butonunun ID'si
@@ -33,14 +48,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        TextView email_text = findViewById(R.id.email_text);
-        TextView password_text = findViewById(R.id.password_text);
-        TextView error_text = findViewById(R.id.error_text);
+
 
         findViewById(R.id.giris_yap_button).setOnClickListener(a -> {
             String response = http_request_builder.Login(
                     email_text.getText().toString(),
-                    password_text.getText().toString());
+                    password_text.getText().toString(),
+                    this);
 
             if (response == null || response.isEmpty())
             {
@@ -49,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
 
             error_text.setText(response);
 
-            if(response.equals("Register successful"))
+            if(response.equals("Login successful"))
             {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);

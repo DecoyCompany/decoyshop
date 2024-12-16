@@ -1,5 +1,8 @@
 package com.example.myapplication.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.List;
 
 
@@ -9,8 +12,10 @@ public class Kategori extends base_entity
 
     private int KATEGORI_STOK = 0;
 
+    @JsonBackReference("alt-ust_kategori")
     private Kategori ust_kategori;
 
+    @JsonManagedReference("alt-ust_kategori")
     private List<Kategori> alt_kategoriler;
 
     public String getKATEGORI_ISMI() {

@@ -2,9 +2,11 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.myapplication.entities.Kategori;
 import com.example.myapplication.entities.Urun;
 import com.example.myapplication.ui.login.LoginActivity;
 import com.example.myapplication.ui.myaccount.MyAccountActivity;
@@ -70,6 +72,20 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this); // Or GridLayoutManager, etc.
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
+        // Kategorileri getir
+        List<Kategori> kategoriler = http_request_builder.getKategoriler(this);
+
+        if (kategoriler != null) {
+            for (Kategori kategori : kategoriler) {
+                Log.d("Kategori", "Kategori Adı: " + kategori.getKATEGORI_ISMI());
+            }
+        } else {
+            Log.e("Kategori", "Kategoriler alınırken hata oluştu veya null değer döndü.");
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+        }
+
 
     }
 }

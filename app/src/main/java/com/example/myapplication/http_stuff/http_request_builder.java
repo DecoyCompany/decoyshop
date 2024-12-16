@@ -207,7 +207,7 @@ public class http_request_builder
                 }
 
                 Request request = new Request.Builder()
-                        .url(base_url + "/CRUD/read/Kategoriler/all")
+                        .url(base_url + "/CRUD/read/Kategori/all")
                         .get()
                         .header("Authorization", "Bearer " + token)
                         .build();

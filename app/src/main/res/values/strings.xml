@@ -7,9 +7,8 @@
     <string name="register">Kayıt Ol</string>
     <string name="email">Email adres</string>
     <string name="login">giriş yap</string>
-
-
-
+    <string name="left_arrow">Left Arrow</string>
+    <string name="right_arrow">Right Arrow</string>">
 
 
     <string name="password">Şifre</string>

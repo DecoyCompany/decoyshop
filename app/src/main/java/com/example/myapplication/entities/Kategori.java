@@ -13,7 +13,7 @@ public class Kategori extends base_entity
     private int KATEGORI_STOK = 0;
 
     @JsonBackReference("alt-ust_kategori")
-    private Kategori ust_kategori;
+    private Kategori ustKategori;
 
     @JsonManagedReference("alt-ust_kategori")
     private List<Kategori> alt_kategoriler;
@@ -34,12 +34,12 @@ public class Kategori extends base_entity
         this.KATEGORI_STOK = KATEGORI_STOK;
     }
 
-    public Kategori getUst_kategori() {
-        return ust_kategori;
+    public Kategori getUstKategori() {
+        return ustKategori;
     }
 
-    public void setUst_kategori(Kategori ust_kategori) {
-        this.ust_kategori = ust_kategori;
+    public void setUstKategori(Kategori ust_kategori) {
+        this.ustKategori = ust_kategori;
     }
 
     public List<Kategori> getAlt_kategoriler() {

@@ -32,20 +32,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/mobile_navigation" />
 
-    <TextView
-        android:id="@+id/search_bar"
-        android:layout_width="340dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:background="@drawable/edit_text_background"
-        android:hint="marka, ürün veya kategori ara"
-        android:padding="15dp"
-        android:textColor="@color/textColorWhite"
-        android:textColorHint="@color/TextColorHint"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
         android:id="@+id/user_icon"
         android:layout_width="60dp"
@@ -54,112 +40,31 @@
         android:contentDescription="@string/user_icon"
         android:padding="8dp"
         android:src="@drawable/ic_home_usericon_24dp"
-        app:layout_constraintBottom_toBottomOf="@id/search_bar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/search_bar"
-        app:layout_constraintTop_toTopOf="@id/search_bar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <!-- Kategoriler Alanı -->
-    <HorizontalScrollView
-        android:id="@+id/category_scroll_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:fillViewport="true"
-        android:overScrollMode="never"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/Ust_kategoriler_liste"
+        android:layout_width="409dp"
+        android:layout_height="82dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_bar">
+        app:layout_constraintTop_toBottomOf="@+id/user_icon">
 
-        <LinearLayout
-            android:id="@+id/category_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp">
-
-            <!-- Kategori Butonları -->
-            <Button
-                android:id="@+id/btn_all_categories"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="7dp"
-                android:backgroundTint="@color/orange_400"
-                android:drawableLeft="@drawable/baseline_calendar_view_day_24"
-                android:drawablePadding="8dp"
-                android:padding="10dp"
-                android:text="Tüm Kategoriler"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-
-            <Button
-                android:id="@+id/category_button_electronics"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:backgroundTint="@color/gray_600"
-                android:text="Elektronik"
-                android:textColor="@color/white" />
-
-            <Button
-                android:id="@+id/category_button_clothing"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:backgroundTint="@color/gray_600"
-                android:text="Elbise"
-                android:textColor="@color/white" />
-
-            <Button
-                android:id="@+id/category_button_shoes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:backgroundTint="@color/gray_600"
-                android:text="Ayakkabı"
-                android:textColor="@color/white" />
-
-            <Button
-                android:id="@+id/category_button_books"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:backgroundTint="@color/gray_600"
-                android:text="Kitap"
-                android:textColor="@color/white" />
-
-            <!-- Ekstra Kategori Örneği -->
-            <Button
-                android:id="@+id/category_button_toys"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:backgroundTint="@color/gray_600"
-                android:text="Oyuncak"
-                android:textColor="@color/white" />
-
-            <Button
-                android:id="@+id/category_button_furniture"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:backgroundTint="@color/gray_600"
-                android:text="Mobilya"
-                android:textColor="@color/white" />
-        </LinearLayout>
-    </HorizontalScrollView>
+    </androidx.recyclerview.widget.RecyclerView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/urunler_liste"
-        android:layout_width="409dp"
-        android:layout_height="556dp"
-        android:layout_marginTop="118dp"
+        android:layout_width="410dp"
+        android:layout_height="534dp"
+        android:layout_marginTop="140dp"
         android:background="@android:drawable/gallery_thumb"
         android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -196,6 +196,63 @@ public class http_request_builder
         }
     }
 
+    public static List<Kategori> getUstKategoriler(Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences("user_data", Context.MODE_PRIVATE);
+        String token = preferences.getString("token", null);
+        FutureTask<List<Kategori>> futureTask = new FutureTask<>(() -> {
+            try
+            {
+                if (token == null)
+                {
+                    Log.e("Auth", "Token is missing, redirecting to login");
+                    return null;
+                }
+
+                Request request = new Request.Builder()
+                        .url(base_url + "/CRUD/read/ust_kategori")
+                        .get()
+                        .header("Authorization","Bearer " + token)
+                        .build();
+
+                Log.e("Auth",request.toString());
+
+                try (Response response = client.newCall(request).execute())
+                {
+                    if (response.body() != null && response.isSuccessful())
+                    {
+                        String value = response.body().string();
+                        Log.e("output",value);
+                        return mapper.readValue(value,
+                                mapper.getTypeFactory().constructCollectionType(List.class, Kategori.class));
+                    }
+                    else
+                    {
+                        Log.e("API", "Failed to get products or received empty response. " + response.toString());
+                        return null;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Log.e("API", "Error in getting products", e);
+                return null;
+            }
+        });
+
+        Thread new_thread = new Thread(futureTask);
+        new_thread.start();
+        try
+        {
+            return futureTask.get();
+        }
+        catch (Exception e)
+        {
+            Log.e("API", "Error in getting products", e);
+            return null;
+        }
+    }
+
     public static List<Kategori> getKategoriler(Context context) {
         SharedPreferences preferences = context.getSharedPreferences("user_data", Context.MODE_PRIVATE);
         String token = preferences.getString("token", null);
@@ -240,6 +297,50 @@ public class http_request_builder
         return null;
     }
 
+    public static List<Urun> getUrunlerKategori(Context context, Kategori kategori)
+    {
+        SharedPreferences preferences = context.getSharedPreferences("user_data", Context.MODE_PRIVATE);
+        String token = preferences.getString("token", null);
+        FutureTask<List<Urun>> futureTask = new FutureTask<>(() -> {
+            try {
+                if (token == null) {
+                    Log.e("Auth", "Token is missing, redirecting to login");
+                    return null;
+                }
+
+                Request request = new Request.Builder()
+                        .url(base_url + "/CRUD/read/urunler/kategori" + kategori.getId())
+                        .get()
+                        .header("Authorization", "Bearer " + token)
+                        .build();
+
+                Log.e("Auth", request.toString());
+
+                try (Response response = client.newCall(request).execute()) {
+                    if (response.body() != null && response.isSuccessful()) {
+                        String value = response.body().string();
+                        Log.e("output",value);
+                        return mapper.readValue(value,
+                                mapper.getTypeFactory().constructCollectionType(List.class, Urun.class));
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.e("RequestError", "Error while fetching categories: " + e.getMessage());
+            }
+            return null;
+        });
+
+        Thread thread = new Thread(futureTask);
+        thread.start();
+
+        try {
+            return futureTask.get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 
 }

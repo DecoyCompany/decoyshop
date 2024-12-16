@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.http_stuff.http_request_builder;
 import com.example.myapplication.adapters.urunler_table_adapter;
+import com.example.myapplication.adapters.ust_kategoriler_adapter;
 import com.example.myapplication.databinding.ActivityMainBinding;
 
 import java.util.List;
@@ -59,6 +60,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        List<Kategori> ust_kategoriler = http_request_builder.getUstKategoriler(this);
+        if(ust_kategoriler == null)
+        {
+            Log.e("ust_kategori","ust_kategroi is emtpty !!!");
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+        }
+
+        ust_kategoriler_adapter ustKategorilerAdapter = new ust_kategoriler_adapter(this,ust_kategoriler);
+        RecyclerView recyclerView_kategoriler = findViewById(R.id.Ust_kategoriler_liste);
+        Log.e("ust_kategori",recyclerView_kategoriler.toString());
+        recyclerView_kategoriler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        recyclerView_kategoriler.setAdapter(ustKategorilerAdapter);
+
         List<Urun> urunler = http_request_builder.getUrunlerPopular(10,this);
 
         if(urunler == null)
@@ -68,10 +83,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         urunler_table_adapter adapter = new urunler_table_adapter(this, urunler);
-        RecyclerView recyclerView = findViewById(R.id.urunler_liste); // Replace with your RecyclerView's ID
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this); // Or GridLayoutManager, etc.
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+        RecyclerView recyclerView_urunler = findViewById(R.id.urunler_liste);
+        recyclerView_urunler.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView_urunler.setAdapter(adapter);
 
         // Kategorileri getir
         List<Kategori> kategoriler = http_request_builder.getKategoriler(this);

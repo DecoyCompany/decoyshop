@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.ProductPageActivity">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -13,15 +18,64 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Ürün Resmi -->
-            <ImageView
-                android:id="@+id/product_image"
+            <!-- Ürün Resmi (ViewPager) -->
+
+            <!-- Sol Ok -->
+
+            <!-- Sağ Ok -->
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/sign" />
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:id="@+id/left_arrow"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_alignBottom="@id/product_image_pager"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="95dp"
+                    android:contentDescription="@string/left_arrow"
+                    android:layout_marginBottom="58dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:src="@drawable/baseline_arrow_left_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/product_image_pager"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/right_arrow"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_alignBottom="@id/product_image_pager"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="95dp"
+                    android:layout_marginEnd="16dp"
+                    android:contentDescription="@string/right_arrow"
+                    android:layout_marginBottom="58dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:src="@drawable/baseline_arrow_right_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/product_image_pager"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/product_image_pager"
+                    android:layout_width="314dp"
+                    android:layout_height="148dp"
+                    android:layout_marginTop="29dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/right_arrow"
+                    app:layout_constraintStart_toEndOf="@+id/left_arrow"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!-- Ürün Başlığı -->
+
             <RatingBar
                 android:id="@+id/ratingBar2"
                 android:layout_width="match_parent"
@@ -95,10 +149,5 @@
 
         </LinearLayout>
     </ScrollView>
-
-
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

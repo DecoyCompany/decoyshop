@@ -157,6 +157,18 @@ public class TestRunner implements CommandLineRunner {
         ceviz_agaci.setUrunKategorisi(agac);
 
         crudService.Create(List.of(ceviz_agaci));
+        // xxxxx
+        Urun cam_agaci =new Urun();
+        cam_agaci.setURUN_AD("cam agaci");
+        cam_agaci.setUrunKategorisi(agac);
+
+        crudService.Create(List.of(cam_agaci));
+
+        Urun mese_agaci =new Urun();
+        mese_agaci.setURUN_AD("mese agaci");
+        mese_agaci.setUrunKategorisi(agac);
+
+        crudService.Create(List.of(mese_agaci));
 
         Sirket cem_karaca = new Sirket();
         cem_karaca.setSIRKET_ISMI("cem_karaca");
@@ -170,7 +182,23 @@ public class TestRunner implements CommandLineRunner {
         stock.setFiyat(10F);
         stock.setIndirim_orani(1F);
 
-        crudService.Create(List.of(stock));
+        //xxxxxxxxxxx
+        Stock stock2 = new Stock();
+        stock2.setUrun(new Urun().setId(cam_agaci.getId()));
+        stock2.setStok(500);
+        stock2.setSirket(new Sirket().setId(cem_karaca.getId()));
+        stock2.setFiyat(10F);
+        stock2.setIndirim_orani(1F);
+
+        //xxxxxxxxxxxxxx
+        Stock stock3 = new Stock();
+        stock3.setUrun(new Urun().setId(mese_agaci.getId()));
+        stock3.setStok(500);
+        stock3.setSirket(new Sirket().setId(cem_karaca.getId()));
+        stock3.setFiyat(10F);
+        stock3.setIndirim_orani(1F);
+
+        crudService.Create(List.of(stock,stock2,stock3));
 
     }
 }

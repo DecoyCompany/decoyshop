@@ -114,7 +114,7 @@ public class CRUD_service
         Urun_repo repo = (Urun_repo) repositories.get(Urun.class);
         if (repo != null)
         {
-            return repo.findTopNByOrderByUrunPuaniDesc(page);
+            return repo.findByOrderByUrunPuaniDesc(page).getContent();
         }
         logger.error("Repository not found for class: {}", Urun.class.getName());
         return List.of();

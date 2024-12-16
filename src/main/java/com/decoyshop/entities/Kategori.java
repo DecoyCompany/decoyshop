@@ -23,9 +23,9 @@ public class Kategori extends base_entity
     @JsonBackReference("alt-ust_kategori")
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "UST_KATEGORI_ID")
-    private Kategori ust_kategori;
+    private Kategori ustKategori;
 
     @JsonManagedReference("alt-ust_kategori")
-    @OneToMany(mappedBy = "ust_kategori", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "ustKategori", cascade = CascadeType.MERGE)
     private List<Kategori> alt_kategoriler;
 }

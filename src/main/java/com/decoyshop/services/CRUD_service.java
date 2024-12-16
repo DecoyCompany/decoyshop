@@ -131,6 +131,17 @@ public class CRUD_service
         return null;
     }
 
+    public List<Kategori> Read_ust_kategori()
+    {
+        Kategori_repo repo = (Kategori_repo) repositories.get(Kategori.class);
+        if (repo != null)
+        {
+            return repo.findByustKategoriIsNull();
+        }
+        logger.error("Repository not found for class: {}",Kategori.class.getName());
+        return null;
+    }
+
     public List<Urun> Read_Urun_by_Kategori(List<Integer> kategori_ids)
     {
         if(kategori_ids == null || kategori_ids.isEmpty())

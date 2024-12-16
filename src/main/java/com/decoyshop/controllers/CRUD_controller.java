@@ -144,6 +144,20 @@ public class CRUD_controller
         return ResponseEntity.status(400).body(null);
     }
 
+    @GetMapping(value = "/read/ust_kategori")
+    public ResponseEntity<List<Kategori>> Read_ust_kategori()
+    {
+
+        List<Kategori> value = crud.Read_ust_kategori();
+
+        if (value == null || value.isEmpty())
+        {
+            return ResponseEntity.status(500).body(null);
+        }
+
+        return ResponseEntity.ok(value);
+    }
+
     @PutMapping(value = "/update")
     public <T extends base_entity> ResponseEntity<String> Update(@RequestBody List<T> objeler)
     {

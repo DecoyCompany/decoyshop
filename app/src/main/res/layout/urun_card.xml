@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/teal_200"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/productImage"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:id="@+id/urun_ismi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:textAlignment="center"
+        android:textColor="@color/textColorWhite"
+        android:textColorHighlight="@color/textColorWhite"
+        android:textColorHint="@color/TextColorHint"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        tools:text="Ürun ismi" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contextClickable="false"
+        android:isIndicator="true"
+        android:max="10"
+        android:numStars="5"
+        android:progress="5"
+        android:progressTint="@color/oruspu_moru" />
+
+    <TextView
+        android:id="@+id/urun_fiyat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        android:textAlignment="center"
+        android:textColor="@color/textColorWhite"
+        android:textColorHighlight="@color/textColorWhite"
+        android:textColorHint="@color/TextColorHint"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        tools:text="Ürun fiyatı" />
+
+    <Button
+        android:id="@+id/urune_git"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/oruspu_moru"
+        android:text="Ürüne Git"
+        android:textColor="@color/textColorWhite"
+        android:textColorHighlight="@color/textColorWhite"
+        android:textColorHint="@color/TextColorHint"
+        android:textSize="24sp" />
+
+</LinearLayout>

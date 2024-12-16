@@ -1,15 +1,16 @@
-package com.example.myapplication.entities.weak;
-import com.example.myapplication.entities.*;
-
+package com.example.myapplication.entities;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import java.util.Date;
 import java.util.List;
 
+
 public class Yorum extends base_entity
 {
-
+    @JsonBackReference("yorum-urun")
     private Urun urun;
 
+    @JsonBackReference("yorum-kullanici")
     private Kullanici yorumcu;
 
     private float puan;
@@ -21,7 +22,6 @@ public class Yorum extends base_entity
     private List<String> resimler;
 
     private Yorum cevap;
-
 
     private boolean sorumu;
 

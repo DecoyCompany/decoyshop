@@ -1,16 +1,10 @@
 package com.example.myapplication.entities;
 
-import com.example.myapplication.entities.weak.Siparis;
-import com.example.myapplication.entities.weak.Yorum;
-
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.List;
-
-
 
 public class Kullanici extends base_entity
 {
-
     private String kullanici_adi;
 
     private String email;
@@ -21,13 +15,15 @@ public class Kullanici extends base_entity
 
     private List<String> adres_bilgisi;
 
-    private List<Urun> sepet;
-
+    @JsonManagedReference("siparis-kullanıcı")
     private List<Siparis> siparisler;
 
+    @JsonManagedReference("yorum-kullanici")
     private List<Yorum> yorumlar;
 
     private List<Urun> favoriler;
+
+    private List<Urun> sepet;
 
     public String getKullanici_adi() {
         return kullanici_adi;
@@ -69,14 +65,6 @@ public class Kullanici extends base_entity
         this.adres_bilgisi = adres_bilgisi;
     }
 
-    public List<Urun> getSepet() {
-        return sepet;
-    }
-
-    public void setSepet(List<Urun> sepet) {
-        this.sepet = sepet;
-    }
-
     public List<Siparis> getSiparisler() {
         return siparisler;
     }
@@ -99,5 +87,13 @@ public class Kullanici extends base_entity
 
     public void setFavoriler(List<Urun> favoriler) {
         this.favoriler = favoriler;
+    }
+
+    public List<Urun> getSepet() {
+        return sepet;
+    }
+
+    public void setSepet(List<Urun> sepet) {
+        this.sepet = sepet;
     }
 }

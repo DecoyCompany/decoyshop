@@ -1,9 +1,9 @@
 package com.example.myapplication.entities;
-import com.example.myapplication.entities.weak.Stock;
-import com.example.myapplication.entities.weak.Yorum;
 
 
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.util.List;
 
 
@@ -12,21 +12,22 @@ public class Urun extends base_entity
 
     private String URUN_AD;
 
-    private float URUN_PUANI;
+    private float urunPuani;
 
     private List<String> etiketler;
 
     private List<String> resimler;
 
-    private Kategori URUN_KATEGORISI;
+    private Kategori urunKategorisi;
 
+    @JsonManagedReference("yorum-urun")
     private List<Yorum> yorumlar;
 
+    @JsonIgnore
     private List<Urun> oneriler;
 
+    @JsonManagedReference("urun-stock")
     private List<Stock> stoklar;
-
-    private List<Kullanici> favoriOlanKullanicilar;
 
     public String getURUN_AD() {
         return URUN_AD;
@@ -36,12 +37,12 @@ public class Urun extends base_entity
         this.URUN_AD = URUN_AD;
     }
 
-    public float getURUN_PUANI() {
-        return URUN_PUANI;
+    public float getUrunPuani() {
+        return urunPuani;
     }
 
-    public void setURUN_PUANI(float URUN_PUANI) {
-        this.URUN_PUANI = URUN_PUANI;
+    public void setUrunPuani(float urunPuani) {
+        this.urunPuani = urunPuani;
     }
 
     public List<String> getEtiketler() {
@@ -60,12 +61,12 @@ public class Urun extends base_entity
         this.resimler = resimler;
     }
 
-    public Kategori getURUN_KATEGORISI() {
-        return URUN_KATEGORISI;
+    public Kategori getUrunKategorisi() {
+        return urunKategorisi;
     }
 
-    public void setURUN_KATEGORISI(Kategori URUN_KATEGORISI) {
-        this.URUN_KATEGORISI = URUN_KATEGORISI;
+    public void setUrunKategorisi(Kategori urunKategorisi) {
+        this.urunKategorisi = urunKategorisi;
     }
 
     public List<Yorum> getYorumlar() {
@@ -92,11 +93,4 @@ public class Urun extends base_entity
         this.stoklar = stoklar;
     }
 
-    public List<Kullanici> getFavoriOlanKullanicilar() {
-        return favoriOlanKullanicilar;
-    }
-
-    public void setFavoriOlanKullanicilar(List<Kullanici> favoriOlanKullanicilar) {
-        this.favoriOlanKullanicilar = favoriOlanKullanicilar;
-    }
 }

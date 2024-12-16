@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.example.myapplication.entities.Urun;
+import com.example.myapplication.ui.login.LoginActivity;
 import com.example.myapplication.ui.myaccount.MyAccountActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -13,8 +16,14 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.myapplication.http_stuff.http_request_builder;
+import com.example.myapplication.adapters.urunler_table_adapter;
 import com.example.myapplication.databinding.ActivityMainBinding;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,5 +56,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        List<Urun> urunler = http_request_builder.getUrunlerPopular(10,this);
+
+        if(urunler == null)
+        {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+        }
+
+        urunler_table_adapter adapter = new urunler_table_adapter(this, urunler);
+        RecyclerView recyclerView = findViewById(R.id.urunler_liste); // Replace with your RecyclerView's ID
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this); // Or GridLayoutManager, etc.
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+
     }
 }

@@ -1,9 +1,8 @@
 package com.example.myapplication.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import com.example.myapplication.entities.weak.Stock;
-import com.example.myapplication.entities.weak.Siparis;
 
 import java.util.List;
 
@@ -16,8 +15,10 @@ public class Sirket extends base_entity
 
     private String ILETISIM_NO;
 
+    @JsonManagedReference("sirket-siparis")
     private List<Siparis> siparisler;
 
+    @JsonManagedReference("sirket-stock")
     private List<Stock> stocklar;
 
     public String getSIRKET_ISMI() {
@@ -36,20 +37,20 @@ public class Sirket extends base_entity
         this.SIRKET_ADRESI = SIRKET_ADRESI;
     }
 
-    public List<Siparis> getSiparisler() {
-        return siparisler;
-    }
-
-    public void setSiparisler(List<Siparis> siparisler) {
-        this.siparisler = siparisler;
-    }
-
     public String getILETISIM_NO() {
         return ILETISIM_NO;
     }
 
     public void setILETISIM_NO(String ILETISIM_NO) {
         this.ILETISIM_NO = ILETISIM_NO;
+    }
+
+    public List<Siparis> getSiparisler() {
+        return siparisler;
+    }
+
+    public void setSiparisler(List<Siparis> siparisler) {
+        this.siparisler = siparisler;
     }
 
     public List<Stock> getStocklar() {

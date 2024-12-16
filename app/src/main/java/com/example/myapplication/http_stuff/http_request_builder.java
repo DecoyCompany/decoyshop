@@ -3,9 +3,13 @@ package com.example.myapplication.http_stuff;
 
 import android.content.SharedPreferences;
 import android.content.Context;
+import android.util.Log;
 
 import com.example.myapplication.entities.Kullanici;
+import com.example.myapplication.entities.Urun;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.List;
 import java.util.concurrent.FutureTask;
 
 import okhttp3.MediaType;
@@ -35,6 +39,7 @@ public class http_request_builder
 
                 Request request = new Request.Builder()
                         .url(base_url + "/register/user")
+                        .header("Content-Type", "application/json")
                         .post(body)
                         .build();
 
@@ -125,6 +130,62 @@ public class http_request_builder
         {
             e.printStackTrace();
             return e.getMessage();
+        }
+    }
+
+    public static List<Urun> getUrunlerPopular(int limit, Context context)
+    {
+        SharedPreferences preferences = context.getSharedPreferences("user_data", Context.MODE_PRIVATE);
+        String token = preferences.getString("token", null);
+        FutureTask<List<Urun>> futureTask = new FutureTask<>(() -> {
+            try
+            {
+                if (token == null)
+                {
+                    Log.e("Auth", "Token is missing, redirecting to login");
+                    return null;
+                }
+
+                Request request = new Request.Builder()
+                        .url(base_url + "/CRUD/read/Urun/"+limit +"/0")
+                        .get()
+                        .header("Authorization","Bearer " + token)
+                        .build();
+
+                Log.e("Auth",request.toString());
+
+                try (Response response = client.newCall(request).execute())
+                {
+                    if (response.body() != null && response.isSuccessful())
+                    {
+                        String value = response.body().string();
+                        Log.e("output",value);
+                        return mapper.readValue(value,
+                                mapper.getTypeFactory().constructCollectionType(List.class, Urun.class));
+                    }
+                    else
+                    {
+                        Log.e("API", "Failed to get products or received empty response. " + response.toString());
+                        return null;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Log.e("API", "Error during request execution", e);
+                return null;
+            }
+        });
+        Thread new_thread = new Thread(futureTask);
+        new_thread.start();
+        try
+        {
+            return futureTask.get();
+        }
+        catch (Exception e)
+        {
+            Log.e("API", "Error in getting products", e);
+            return null;
         }
     }
 }

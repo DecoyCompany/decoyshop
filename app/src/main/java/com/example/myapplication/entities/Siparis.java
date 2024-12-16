@@ -1,22 +1,22 @@
-package com.example.myapplication.entities.weak;
-import com.example.myapplication.entities.*;
+package com.example.myapplication.entities;
 
-
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.util.List;
+
 
 public class Siparis extends base_entity
 {
-
+    @JsonBackReference("sirket-siparis")
     private Sirket sirket;
 
     private List<Urun> alinan_urunler;
 
+    @JsonBackReference("siparis-kullanıcı")
     private Kullanici alici;
 
     private String siparisDetay;
 
-    private boolean tamamlandimi;
+    private boolean tamamlandimi = false;
 
     public Sirket getSirket() {
         return sirket;

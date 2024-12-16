@@ -66,11 +66,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/search_bar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:fillViewport="true"
-        android:overScrollMode="never">
+        android:overScrollMode="never"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_bar">
 
         <LinearLayout
             android:id="@+id/category_layout"
@@ -85,13 +85,13 @@
                 android:id="@+id/btn_all_categories"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tüm Kategoriler"
                 android:layout_marginRight="7dp"
-                android:textColor="@color/white"
                 android:backgroundTint="@color/orange_400"
                 android:drawableLeft="@drawable/baseline_calendar_view_day_24"
                 android:drawablePadding="8dp"
                 android:padding="10dp"
+                android:text="Tüm Kategoriler"
+                android:textColor="@color/white"
                 android:textSize="16sp" />
 
             <Button
@@ -108,8 +108,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="Elbise"
                 android:backgroundTint="@color/gray_600"
+                android:text="Elbise"
                 android:textColor="@color/white" />
 
             <Button
@@ -117,8 +117,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="Ayakkabı"
                 android:backgroundTint="@color/gray_600"
+                android:text="Ayakkabı"
                 android:textColor="@color/white" />
 
             <Button
@@ -126,8 +126,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="Kitap"
                 android:backgroundTint="@color/gray_600"
+                android:text="Kitap"
                 android:textColor="@color/white" />
 
             <!-- Ekstra Kategori Örneği -->
@@ -136,8 +136,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="Oyuncak"
                 android:backgroundTint="@color/gray_600"
+                android:text="Oyuncak"
                 android:textColor="@color/white" />
 
             <Button
@@ -145,11 +145,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:text="Mobilya"
                 android:backgroundTint="@color/gray_600"
+                android:text="Mobilya"
                 android:textColor="@color/white" />
         </LinearLayout>
     </HorizontalScrollView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/urunler_liste"
+        android:layout_width="409dp"
+        android:layout_height="556dp"
+        android:layout_marginTop="118dp"
+        android:background="@android:drawable/gallery_thumb"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,23 +1,23 @@
-package com.example.myapplication.entities.weak;
-import com.example.myapplication.entities.Sirket;
-import com.example.myapplication.entities.Urun;
-import com.example.myapplication.entities.base_entity;
+package com.example.myapplication.entities;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 public class Stock extends base_entity
 {
-
+    @JsonBackReference("sirket-stock")
     private Sirket sirket;
 
+    @JsonBackReference("urun-stock")
     private Urun urun;
 
     private String aciklama;
 
-    private int stok;
+    private int stok = 0;
 
-    private Float fiyat;
+    private Float fiyat = 0.0F;
 
-    private Float indirim_orani;
+    private Float indirim_orani = 1F;
 
     public Sirket getSirket() {
         return sirket;

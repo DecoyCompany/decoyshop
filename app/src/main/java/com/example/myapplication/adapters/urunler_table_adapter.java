@@ -65,6 +65,8 @@ public class urunler_table_adapter extends RecyclerView.Adapter<urunler_table_ad
 
     @Override
     public int getItemCount() {
+        if(urunList == null)
+            return 0;
         return urunList.size();
     }
 

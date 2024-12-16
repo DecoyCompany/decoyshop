@@ -39,7 +39,7 @@ public class CRUD_controller
     {
         try
         {
-            Class<T> class_type = (Class<T>) Class.forName(class_type_string);
+            Class<T> class_type = (Class<T>) Class.forName("com.decoyshop.entities." + class_type_string);
             List<T> value = crud.Read_more(class_type);
             if(value == null || value.isEmpty())
             {
@@ -100,7 +100,7 @@ public class CRUD_controller
     {
         try
         {
-            Class<T> class_type = (Class<T>) Class.forName(class_type_string);
+            Class<T> class_type = (Class<T>) Class.forName("com.decoyshop.entities." + class_type_string);
 
                 if(ids == null || ids.isEmpty())
             {

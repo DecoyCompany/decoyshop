@@ -1,6 +1,6 @@
-package com.decoyshop.repositories.weak;
+package com.decoyshop.repositories;
 
-import com.decoyshop.entities.weak.Yorum;
+import com.decoyshop.entities.Yorum;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

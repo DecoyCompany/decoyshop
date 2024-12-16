@@ -1,5 +1,5 @@
-package com.decoyshop.entities.weak;
-import com.decoyshop.entities.*;
+package com.decoyshop.entities;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,12 +12,13 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class Yorum extends base_entity
 {
-
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JsonBackReference("yorum-urun")
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "YORUM_YAPILAN_URUN",nullable = false)
     private Urun urun;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JsonBackReference("yorum-kullanici")
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "YORUMU_YAPAN",nullable = false)
     private Kullanici yorumcu;
 
@@ -34,7 +35,7 @@ public class Yorum extends base_entity
     @Column(name = "YORUM_RESIMLER")
     private List<String> resimler;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "YORUM_CEVAP")
     private Yorum cevap;
 

@@ -1,10 +1,9 @@
 package com.decoyshop.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
-import com.decoyshop.entities.weak.Stock;
-import com.decoyshop.entities.weak.Siparis;
 import lombok.EqualsAndHashCode;
 
 import java.util.List;
@@ -19,16 +18,18 @@ public class Sirket extends base_entity
     private String SIRKET_ISMI;
 
 
-    @Column(name = "SIRKET_ADRESI", nullable = false)
+    @Column(name = "SIRKET_ADRESI")
     private String SIRKET_ADRESI;
 
-    @Column(name = "ILETISIM_NO", nullable = false)
+    @Column(name = "ILETISIM_NO")
     private String ILETISIM_NO;
 
-    @OneToMany(mappedBy = "sirket", cascade = CascadeType.PERSIST)
+    @JsonManagedReference("sirket-siparis")
+    @OneToMany(mappedBy = "sirket", cascade = CascadeType.MERGE)
     private List<Siparis> siparisler;
 
-    @OneToMany(mappedBy = "sirket", cascade = CascadeType.PERSIST)
+    @JsonManagedReference("sirket-stock")
+    @OneToMany(mappedBy = "sirket", cascade = CascadeType.MERGE)
     private List<Stock> stocklar;
 
 }

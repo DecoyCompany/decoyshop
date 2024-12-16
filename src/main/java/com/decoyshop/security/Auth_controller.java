@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -33,7 +34,8 @@ public class Auth_controller
             logger.warn("request come to login");
             // Authenticate the user with email and password
             Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(email, password)
+                    new UsernamePasswordAuthenticationToken(email, password,
+                            AuthorityUtils.createAuthorityList("ROLE_USER"))
             );
 
             // Generate JWT token if authentication is successful

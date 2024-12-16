@@ -1,6 +1,5 @@
 package com.decoyshop.controllers;
 
-import com.decoyshop.entities.weak.*;
 import com.decoyshop.entities.*;
 import com.decoyshop.services.CRUD_service;
 import org.slf4j.Logger;
@@ -61,7 +60,7 @@ public class CRUD_controller
     {
         try
         {
-            Class<T> class_type = (Class<T>) Class.forName(class_type_string);
+            Class<T> class_type = (Class<T>) Class.forName("com.decoyshop.entities." + class_type_string);
 
             if(batch_size<1 || batch_number<0)
             {
@@ -69,6 +68,18 @@ public class CRUD_controller
             }
 
             Pageable pageable = PageRequest.of(batch_number,batch_size);
+
+            if(class_type == Urun.class)
+            {
+                List<Urun> value = crud.Read_most_popular(pageable);
+
+                if(value == null || value.isEmpty())
+                {
+                    return ResponseEntity.status(500).body(null);
+                }
+                return ResponseEntity.ok((List<T>) value);
+            }
+
             Page<T> page = crud.Read_more(class_type,pageable);
 
             if(page == null || page.isEmpty())

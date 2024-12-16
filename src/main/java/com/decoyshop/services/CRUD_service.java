@@ -1,9 +1,7 @@
 package com.decoyshop.services;
 
 import com.decoyshop.entities.*;
-import com.decoyshop.entities.weak.*;
 import com.decoyshop.repositories.*;
-import com.decoyshop.repositories.weak.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -111,14 +109,25 @@ public class CRUD_service
         return Page.empty();
     }
 
+    public List<Urun> Read_most_popular(Pageable page)
+    {
+        Urun_repo repo = (Urun_repo) repositories.get(Urun.class);
+        if (repo != null)
+        {
+            return repo.findTopNByOrderByUrunPuaniDesc(page);
+        }
+        logger.error("Repository not found for class: {}", Urun.class.getName());
+        return List.of();
+    }
+
     public <T> List<T> Read_filtered(Example<T> filter_object)
     {
-        JpaRepository<T, Integer> repo = (JpaRepository<T, Integer>) repositories.get(filter_object.getClass());
+        JpaRepository<T, Integer> repo = (JpaRepository<T, Integer>) repositories.get(filter_object.getProbeType());
         if (repo != null)
         {
             return repo.findAll(filter_object);
         }
-        logger.error("Repository not found for class: {}", filter_object.getClass().getName());
+        logger.error("Repository not found for class: {}",filter_object.getProbeType().getName());
         return null;
     }
 

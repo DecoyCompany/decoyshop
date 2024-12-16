@@ -1,8 +1,6 @@
-package com.decoyshop.entities.weak;
-import com.decoyshop.entities.Sirket;
-import com.decoyshop.entities.Urun;
-import com.decoyshop.entities.base_entity;
+package com.decoyshop.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,12 +10,13 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class Stock extends base_entity
 {
-
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JsonBackReference("sirket-stock")
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "SIRKET_ID",nullable = false)
     private Sirket sirket;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JsonBackReference("urun-stock")
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "URUN_ID",nullable = false)
     private Urun urun;
 
@@ -25,11 +24,11 @@ public class Stock extends base_entity
     private String aciklama;
 
     @Column(name = "STOK",nullable = false)
-    private int stok;
+    private int stok = 0;
 
     @Column(name = "FIYAT",nullable = false)
-    private Float fiyat;
+    private Float fiyat = 0.0F;
 
-    @Column(name = "INDIRIM_ORANI")
-    private Float indirim_orani;
+    @Column(name = "INDIRIM_ORANI", nullable = false)
+    private Float indirim_orani = 1F;
 }

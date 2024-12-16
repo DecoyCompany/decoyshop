@@ -1,7 +1,6 @@
 package com.decoyshop.entities;
 
-import com.decoyshop.entities.weak.Siparis;
-import com.decoyshop.entities.weak.Yorum;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -34,19 +33,23 @@ public class Kullanici extends base_entity
     @Column(name = "KULLANICI_ADRESLERI",nullable = false)
     private List<String> adres_bilgisi;
 
+    @JsonManagedReference("siparis-kullanıcı")
     @OneToMany(mappedBy = "alici")
     private List<Siparis> siparisler;
 
-    @OneToMany(mappedBy = "yorumcu",cascade = CascadeType.PERSIST)
+    @JsonManagedReference("yorum-kullanici")
+    @OneToMany(mappedBy = "yorumcu",cascade = CascadeType.MERGE)
     private List<Yorum> yorumlar;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "KULLANICI_FAVORILER",
             joinColumns = @JoinColumn(name = "KULLANICI_ID"),
             inverseJoinColumns = @JoinColumn(name = "URUN_ID"))
     private List<Urun> favoriler;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "KULLANICI_SEPET",
             joinColumns = @JoinColumn(name = "KULLANICI_ID"),
             inverseJoinColumns = @JoinColumn(name = "URUN_ID"))

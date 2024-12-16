@@ -12,4 +12,8 @@ public abstract class base_entity
     @Column(name = "OBJECT_ID",nullable = false)
     private int id;
 
+    public <T extends base_entity> T setId(int id) {
+        this.id = id;
+        return (T) this;
+    }
 }

@@ -5,6 +5,8 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,13 +18,17 @@ import java.io.IOException;
 @Component
 public class Jwt_filter extends OncePerRequestFilter
 {
+    private static final Logger logger = LoggerFactory.getLogger(Jwt_filter.class);
 
     @Autowired
     private Jwt_token_master jwtTokenMaster;
 
     private String getTokenFromRequest(HttpServletRequest request) {
+
+        logger.warn("request come:" + request.toString());
         // Extract the token from the Authorization header
         String bearerToken = request.getHeader("Authorization");
+        logger.warn("token come: " + bearerToken);
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7);  // Remove "Bearer " prefix
         }
@@ -42,6 +48,17 @@ public class Jwt_filter extends OncePerRequestFilter
 
             // Set the authentication in the SecurityContext
             SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+            if (auth != null) {
+                logger.info("Authenticated user: {}", auth.getPrincipal());
+                logger.info("Roles: {}", auth.getAuthorities());
+            } else {
+                logger.error("Authentication is null!");
+            }
+
+            logger.warn("token arrived to filter: " + token);
+
         }
 
         // Continue with the filter chain

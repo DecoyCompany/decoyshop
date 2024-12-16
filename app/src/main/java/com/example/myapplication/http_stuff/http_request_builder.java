@@ -1,14 +1,21 @@
 package com.example.myapplication.http_stuff;
 
 
+import static javax.crypto.Cipher.SECRET_KEY;
+
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.myapplication.entities.Kategori;
 import com.example.myapplication.entities.Kullanici;
 import com.example.myapplication.entities.Urun;
+import com.example.myapplication.ui.login.LoginActivity;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.FutureTask;
 
@@ -188,4 +195,51 @@ public class http_request_builder
             return null;
         }
     }
+
+    public static List<Kategori> getKategoriler(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences("user_data", Context.MODE_PRIVATE);
+        String token = preferences.getString("token", null);
+        FutureTask<List<Kategori>> futureTask = new FutureTask<>(() -> {
+            try {
+                if (token == null) {
+                    Log.e("Auth", "Token is missing, redirecting to login");
+                    return null;
+                }
+
+                Request request = new Request.Builder()
+                        .url(base_url + "/CRUD/read/Kategoriler/all")
+                        .get()
+                        .header("Authorization", "Bearer " + token)
+                        .build();
+
+                Log.e("Auth", request.toString());
+
+                try (Response response = client.newCall(request).execute()) {
+                    if (response.body() != null && response.isSuccessful()) {
+                        String value = response.body().string();
+                        Log.e("output",value);
+                        return mapper.readValue(value,
+                                mapper.getTypeFactory().constructCollectionType(List.class, Kategori.class));
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.e("RequestError", "Error while fetching categories: " + e.getMessage());
+            }
+            return null;
+        });
+
+        Thread thread = new Thread(futureTask);
+        thread.start();
+
+        try {
+            return futureTask.get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
 }

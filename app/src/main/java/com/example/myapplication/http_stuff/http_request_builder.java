@@ -11,11 +11,8 @@ import android.util.Log;
 import com.example.myapplication.entities.Kategori;
 import com.example.myapplication.entities.Kullanici;
 import com.example.myapplication.entities.Urun;
-import com.example.myapplication.ui.login.LoginActivity;
+import com.example.myapplication.entities.Yorum;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.FutureTask;
 

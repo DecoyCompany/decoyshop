@@ -2,6 +2,8 @@ package com.example.myapplication.adapters;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+import com.example.myapplication.ui.productpage.ProductPageActivity;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.Comparator;
 import java.util.List;
@@ -24,6 +28,8 @@ public class urunler_table_adapter extends RecyclerView.Adapter<urunler_table_ad
 {
     private Context context;
     private List<Urun> urunList;
+    private static final String base_url = "http://10.0.2.2:1025";
+    final ObjectMapper mapper = new ObjectMapper();
 
     // Constructor
     public urunler_table_adapter(Context context, List<Urun> urunList) {
@@ -53,13 +59,21 @@ public class urunler_table_adapter extends RecyclerView.Adapter<urunler_table_ad
         if(urun.getResimler().isEmpty())
             Glide.with(context).load(R.drawable.baseline_person_24).into(holder.productImage);
         else
-            Glide.with(context).load(urun.getResimler().get(0)).into(holder.productImage);
+            Glide.with(context).load(base_url + urun.getResimler().get(0)).into(holder.productImage);
 
         // Handle button click
         holder.uruneGitButton.setOnClickListener(v -> {
-            //TODO
-            // Define what happens when the button is clicked
-            // For example, navigate to a product details page
+            try
+            {
+                Intent intent = new Intent(context, ProductPageActivity.class);
+                intent.putExtra("urun", mapper.writeValueAsString(urun));
+                context.startActivity(intent);
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+                Log.e("mapper", e.getMessage());
+            }
         });
     }
 

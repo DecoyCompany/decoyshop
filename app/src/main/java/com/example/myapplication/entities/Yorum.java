@@ -13,6 +13,8 @@ public class Yorum extends base_entity
     @JsonBackReference("yorum-kullanici")
     private Kullanici yorumcu;
 
+    private String yorumcuAdi;
+
     private float puan;
 
     private String yazi;
@@ -87,5 +89,13 @@ public class Yorum extends base_entity
 
     public void setSorumu(boolean sorumu) {
         this.sorumu = sorumu;
+    }
+
+    public String getYorumcuAdi() {
+        return yorumcuAdi;
+    }
+
+    public void setYorumcuAdi(String yorumcuAdi) {
+        this.yorumcuAdi = yorumcuAdi;
     }
 }

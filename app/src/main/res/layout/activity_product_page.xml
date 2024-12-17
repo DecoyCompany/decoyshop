@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.ProductPageActivity">
+    tools:context=".ui.productpage.ProductPageActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -28,58 +28,59 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="265dp"
+                    android:layout_height="189dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5"
+                    tools:src="@tools:sample/backgrounds/scenic" />
+
                 <ImageButton
                     android:id="@+id/left_arrow"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:layout_alignBottom="@id/product_image_pager"
                     android:layout_alignParentStart="true"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginTop="95dp"
-                    android:contentDescription="@string/left_arrow"
-                    android:layout_marginBottom="58dp"
                     android:background="?android:attr/selectableItemBackground"
+                    android:contentDescription="@string/left_arrow"
                     android:src="@drawable/baseline_arrow_left_24"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/product_image_pager"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintEnd_toStartOf="@id/imageView4"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
 
                 <ImageButton
                     android:id="@+id/right_arrow"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    android:layout_alignBottom="@id/product_image_pager"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginTop="95dp"
-                    android:layout_marginEnd="16dp"
-                    android:contentDescription="@string/right_arrow"
-                    android:layout_marginBottom="58dp"
+                    android:layout_marginStart="1dp"
                     android:background="?android:attr/selectableItemBackground"
+                    android:contentDescription="@string/right_arrow"
                     android:src="@drawable/baseline_arrow_right_24"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/product_image_pager"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/product_image_pager"
-                    android:layout_width="314dp"
-                    android:layout_height="148dp"
-                    android:layout_marginTop="29dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/right_arrow"
-                    app:layout_constraintStart_toEndOf="@+id/left_arrow"
+                    app:layout_constraintStart_toEndOf="@id/imageView4"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintVertical_bias="0.5" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!-- Ürün Başlığı -->
 
             <RatingBar
                 android:id="@+id/ratingBar2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:isIndicator="true"
+                android:max="10"
+                android:numStars="5"
+                android:progress="5"
+                android:progressTint="@color/oruspu_moru"
+                android:stepSize="0.5" />
 
             <TextView
                 android:id="@+id/product_title"

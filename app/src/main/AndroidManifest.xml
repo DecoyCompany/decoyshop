@@ -16,7 +16,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ui.ProductPageActivity"
+            android:name=".ui.productpage.ProductPageActivity"
             android:exported="false" />
         <activity
             android:name=".ui.Kategoriler_urunler_Activity"

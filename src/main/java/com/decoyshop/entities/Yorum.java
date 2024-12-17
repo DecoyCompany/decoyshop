@@ -22,6 +22,9 @@ public class Yorum extends base_entity
     @JoinColumn(name = "YORUMU_YAPAN",nullable = false)
     private Kullanici yorumcu;
 
+    @JoinColumn(name = "YORUMCU_ADI",nullable = false)
+    private String yorumcuAdi;
+
     @Column(name = "PUAN")
     private float puan;
 

@@ -1,9 +1,6 @@
 package com.decoyshop;
 
-import com.decoyshop.entities.Kategori;
-import com.decoyshop.entities.Sirket;
-import com.decoyshop.entities.Urun;
-import com.decoyshop.entities.Stock;
+import com.decoyshop.entities.*;
 import com.decoyshop.services.CRUD_service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -146,6 +143,13 @@ public class TestRunner implements CommandLineRunner {
 //        crudService.Create(Arrays.asList(elektronik, giyim, kitap, ayakkabi, oyuncak, mobilya,telefon, bilgisayar, tshirt, pantolon, lego, pelus, sehpa, kanepe, bot, sporAyakkabi, roman, bilimKurgu));
 //        System.out.println("kategoriler kaydedildi.");
 
+        Kullanici altay = new Kullanici();
+        altay.setEmail("altay@gmail.com");
+        altay.setKullanici_adi("altay gök");
+        altay.setSifre("altay123");
+
+        crudService.Create(List.of(altay));
+
         Kategori bitki = new Kategori();
         bitki.setKATEGORI_ISMI("bitkiler");
         bitki.setKATEGORI_STOK(150);
@@ -162,18 +166,33 @@ public class TestRunner implements CommandLineRunner {
         Urun ceviz_agaci =new Urun();
         ceviz_agaci.setURUN_AD("ceviz ağacı");
         ceviz_agaci.setUrunKategorisi(agac);
+        ceviz_agaci.setResimler(List.of("/pictures/ceviz_agaci.png","/pictures/ceviz_agaci2.png"));
+        ceviz_agaci.setUrunPuani(9.7F);
 
         crudService.Create(List.of(ceviz_agaci));
+
+        Yorum ceviz_agaci_yorum = new Yorum();
+        ceviz_agaci_yorum.setUrun(ceviz_agaci);
+        ceviz_agaci_yorum.setPuan(6.7F);
+        ceviz_agaci_yorum.setYazi("ben bir ceviz ağacıyım gülhane parkında\n" +
+                "ne sen farkındasın ne de polis farkında");
+        ceviz_agaci_yorum.setYorumcu(altay);
+        ceviz_agaci_yorum.setYorumcuAdi(altay.getKullanici_adi());
+
+        crudService.Create(List.of(ceviz_agaci_yorum));
+
         // xxxxx
         Urun cam_agaci =new Urun();
         cam_agaci.setURUN_AD("cam agaci");
         cam_agaci.setUrunKategorisi(agac);
+        cam_agaci.setResimler(Arrays.asList("/pictures/cam_agaci.png"));
 
         crudService.Create(List.of(cam_agaci));
 
         Urun mese_agaci =new Urun();
         mese_agaci.setURUN_AD("mese agaci");
         mese_agaci.setUrunKategorisi(agac);
+        mese_agaci.setResimler(List.of("/pictures/mese_agaci.png"));
 
         crudService.Create(List.of(mese_agaci));
 
@@ -188,6 +207,8 @@ public class TestRunner implements CommandLineRunner {
         stock.setSirket(new Sirket().setId(cem_karaca.getId()));
         stock.setFiyat(10F);
         stock.setIndirim_orani(1F);
+        stock.setAciklama("bu ceviz ağacı gülhane parkında değildir!\n" +
+                "lütfen artık sormayın. yılda 3kg ceviz verir.");
 
         //xxxxxxxxxxx
         Stock stock2 = new Stock();

@@ -34,7 +34,7 @@ public class Auth
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests((requests) ->
-                        requests.requestMatchers("/auth/**","/register/**","/error").permitAll()
+                        requests.requestMatchers("/auth/**","/register/**","/error","/pictures/**").permitAll()
                                 .anyRequest().authenticated())
 
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

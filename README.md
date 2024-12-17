@@ -220,13 +220,14 @@ We welcome contributions! To contribute, please follow these steps:
 
 5.**Push Changes
   Push your changes to your forked repository:
+  
   git push origin feature-name
 
 6. Submit a Pull Request
    Create a pull request with a description of your changes.
 
 7. Development Process
-  Pull requests will be reviewed, and revisions may be requested before merging.
+   Pull requests will be reviewed, and revisions may be requested before merging.
 
 8.Code of Conduct
   Be respectful and follow best practices.
